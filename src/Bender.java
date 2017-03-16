@@ -7,21 +7,11 @@ class Bender {
         int y = 0;
         int x = 0;
 
-        //Miramos las columnas que hay en el String
-        while (mapa.charAt(x) != '\n')x++;
+        String[] xy = mapa.split("\n");
 
-        //Miramos las filas que hay en el String
-        for (int i = 0; i < mapa.length() ; i++) {
-            if (mapa.charAt(i) == '\n')y++;
-        }
-        y++;
-
-        char[][] map = new char[y][x];
+        char[][] map = new char[xy.length][xy[0].length()];
 
         mapa = mapa.replaceAll("\n","");
-
-        y = 0;
-        x = 0;
 
         for (int i = 0; i < map.length*map[0].length ; i++) {
             if (x == map[0].length-1){
@@ -33,6 +23,7 @@ class Bender {
             map[y][x] = mapa.charAt(i);
             x++;
         }
+        System.out.println(Arrays.deepToString(map));
     }
 
     // Navegar fins a l'objectiu («$»).
