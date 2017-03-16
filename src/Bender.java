@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 class Bender {
+    char[][] map;
+
     // Constructor: ens passen el mapa en forma d'String
     public Bender(String mapa) {
         int y = 0;
@@ -23,7 +25,8 @@ class Bender {
             map[y][x] = mapa.charAt(i);
             x++;
         }
-        System.out.println(Arrays.deepToString(map));
+
+        this.map = map;
     }
 
     // Navegar fins a l'objectiu («$»).
@@ -31,6 +34,7 @@ class Bender {
     // caràcters on cada lletra pot tenir els valors «S», «N», «W» o «E»,
     // segons la posició del robot a cada moment.
     public String run() {
+
         return null;
     }
 }
