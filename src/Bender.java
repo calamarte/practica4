@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 class Bender {
     char[][] map;
@@ -34,6 +35,30 @@ class Bender {
     // caràcters on cada lletra pot tenir els valors «S», «N», «W» o «E»,
     // segons la posició del robot a cada moment.
     public String run() {
+
+        List<Integer> position = xposition();
+        System.out.println(position);
+
+        return null;
+    }
+
+   private List<Integer> xposition(){
+        List<Integer> position = new ArrayList<>();
+
+        for (int i = 0,y = 1,x = 0; i <(map.length*map.length)- map[0].length ; i++) {
+            if (map[y][x] == 'X'){
+                position.add(y);
+                position.add(x);
+                return position;
+            }
+
+            if (x == map[0].length-1){
+                x = 0;
+                y++;
+                continue;
+            }
+            x++;
+        }
 
         return null;
     }
