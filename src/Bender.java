@@ -1,30 +1,19 @@
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 class Bender {
     char[][] map;
 
     // Constructor: ens passen el mapa en forma d'String
     public Bender(String mapa) {
-        int y = 0;
-        int x = 0;
 
         String[] xy = mapa.split("\n");
 
         char[][] map = new char[xy.length][xy[0].length()];
 
-        mapa = mapa.replaceAll("\n","");
-
-        for (int i = 0; i < map.length*map[0].length ; i++) {
-            if (x == map[0].length-1){
-                map[y][x] = mapa.charAt(i);
-                x = 0;
-                y++;
-                continue;
+        for (int i = 0; i < xy.length ; i++) {
+            for (int j = 0; j < xy[0].length() ; j++) {
+                map[i][j] = xy[i].charAt(j);
             }
-            map[y][x] = mapa.charAt(i);
-            x++;
         }
 
         this.map = map;
@@ -59,9 +48,8 @@ class Bender {
             }
 
             if (map[aux[0]][aux[1]] == '#'){
-                if (perimetro){
-                    direct++;
-                }else{
+                if (perimetro)direct++;
+                else{
                     direct = 0;
                     perimetro = true;
                 }
