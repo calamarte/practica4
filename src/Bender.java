@@ -39,19 +39,25 @@ class Bender {
         char[] direction = new char[]{'S','E','N','W'};
         int[] position = xposition();
         int direct = 0;
+        boolean perimetro = false;
 
         while (true){
             int[] aux = avance(position,direction[direct]);
 
             if (map[aux[0]][aux[1]] == ' '){
                 position = aux;
+                perimetro = false;
                 resultado.append(direction[direct]);
                 continue;
             }
 
             if (map[aux[0]][aux[1]] == '#'){
-                if (direct == 3)direct = 0;
-                else direct++;
+                if (perimetro){
+                    direct++;
+                }else{
+                    direct = 0;
+                    perimetro = true;
+                }
                 continue;
             }
 
