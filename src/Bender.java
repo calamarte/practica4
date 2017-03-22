@@ -61,7 +61,11 @@ class Bender {
                 continue;
             }
 
-            if (map[aux[0]][aux[1]] == 'T'){}
+            if (map[aux[0]][aux[1]] == 'T'){
+                position = portalPosition(aux);
+                resultado.append(direction[direct]);
+                continue;
+            }
 
             if (map[aux[0]][aux[1]] == 'I'){}
 
@@ -117,6 +121,28 @@ class Bender {
                 return resultado;
 
         }
+
+        return null;
+    }
+
+    private int[] portalPosition(int[] position){
+        int[] portal = new int[2];
+
+        for (int i = 0,y = 1,x = 0; i <(map.length*map[0].length)- map[0].length ; i++) {
+            if (map[y][x] == 'T' && position[0] != y && position[1] != x){
+                portal[0] = y;
+                portal[1] = x;
+                return portal;
+            }
+
+            if (x == map[0].length-1){
+                x = 0;
+                y++;
+                continue;
+            }
+            x++;
+        }
+
 
         return null;
     }
