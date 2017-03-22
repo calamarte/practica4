@@ -36,7 +36,7 @@ class Bender {
     // segons la posició del robot a cada moment.
     public String run() {
         StringBuilder resultado = new StringBuilder();
-        char[] direction = new char[]{'S','N','W','E'};
+        char[] direction = new char[]{'S','E','N','W'};
         int[] position = xposition();
         int direct = 0;
 
@@ -46,14 +46,12 @@ class Bender {
             if (map[aux[0]][aux[1]] == ' '){
                 position = aux;
                 resultado.append(direction[direct]);
+                continue;
             }
 
             if (map[aux[0]][aux[1]] == '#'){
-                if (direct == 3){
-                    direct = 0;
-                }else{
-                    direct++;
-                }
+                if (direct == 3)direct = 0;
+                else direct++;
                 continue;
             }
 
@@ -73,7 +71,7 @@ class Bender {
     private int[] xposition(){
         int[] position = new int[2];
 
-        for (int i = 0,y = 1,x = 0; i <(map.length*map.length)- map[0].length ; i++) {
+        for (int i = 0,y = 1,x = 0; i <(map.length*map[0].length)- map[0].length ; i++) {
             if (map[y][x] == 'X'){
                 position[0] = y;
                 position[1] = x;
@@ -92,25 +90,28 @@ class Bender {
     }
 
     private int[] avance(int[] position,char brujula){
+        int[] resultado = Arrays.copyOf(position, 2);
+
         switch (brujula){
 
             case 'S':
-                position[0]++;
-                return position;
-
-            case 'N':
-                position[0]--;
-                return position;
-
-            case 'W':
-                position[1]--;
-                return position;
+                resultado[0]++;
+                return resultado;
 
             case 'E':
-                position[1]++;
-                return position;
+                resultado[1]++;
+                return resultado;
+
+            case 'N':
+                resultado[0]--;
+                return resultado;
+
+            case 'W':
+                resultado[1]--;
+                return resultado;
 
         }
+
         return null;
     }
 }
