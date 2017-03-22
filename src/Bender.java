@@ -36,15 +36,22 @@ class Bender {
     // segons la posició del robot a cada moment.
     public String run() {
         StringBuilder resultado = new StringBuilder();
-        char[] direction = new char[]{'S','E','N','W'};
+        char[] normal = new char[]{'S','E','N','W'};
+        char[] invertido = new char[]{'N','W','S','E'};
+        char[] direction;
         int[] position = xposition();
         int direct = 0;
         boolean perimetro = false;
+        boolean inverter = false;
 
         while (true){
+
+            if (inverter)direction = invertido;
+            else direction = normal;
+
             int[] aux = avance(position,direction[direct]);
 
-            if (map[aux[0]][aux[1]] == ' '){
+            if (map[aux[0]][aux[1]] == ' ' || map[aux[0]][aux[1]]== 'X'){
                 position = aux;
                 perimetro = false;
                 resultado.append(direction[direct]);
@@ -67,7 +74,15 @@ class Bender {
                 continue;
             }
 
-            if (map[aux[0]][aux[1]] == 'I'){}
+            if (map[aux[0]][aux[1]] == 'I'){
+                if (inverter)inverter = false;
+                else inverter = true;
+                perimetro = false;
+                position = aux;
+                resultado.append(direction[direct]);
+                direct = 0;
+                continue;
+            }
 
             if (map[aux[0]][aux[1]] == '$'){
                 resultado.append(direction[direct]);
