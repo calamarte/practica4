@@ -6,6 +6,8 @@ class Bender {
     // Constructor: ens passen el mapa en forma d'String
     public Bender(String mapa) {
 
+        //Creo y lleno un array bidimensional segun las directrizes de el array xy
+        //que contiene la información adaptada por el método .split.
         String[] xy = mapa.split("\n");
 
         char[][] map = new char[xy.length][xy[0].length()];
