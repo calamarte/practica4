@@ -37,11 +37,16 @@ class Bender {
 
         while (true){
 
+            //Escoge el sistema de prioridad entre
+            //los dos posibles
             if (inverter)direction = invertido;
             else direction = normal;
 
+            //Da las cordenadas de la siguiente posición posible
             int[] aux = avance(position,direction[direct]);
 
+            //Mira si la siguiente posición es apta para el movimiento
+            //y no tiene ninguna propiedad
             if (map[aux[0]][aux[1]] == ' ' || map[aux[0]][aux[1]]== 'X'){
                 position = aux;
                 perimetro = false;
@@ -49,6 +54,7 @@ class Bender {
                 continue;
             }
 
+            //Mira si la siguiente posición es una "pared" del mapeado
             if (map[aux[0]][aux[1]] == '#'){
                 if (perimetro)direct++;
                 else{
@@ -58,12 +64,14 @@ class Bender {
                 continue;
             }
 
+            //Mira si la siguiente posición es un teletransportador
             if (map[aux[0]][aux[1]] == 'T'){
                 position = portalPosition(aux);
                 resultado.append(direction[direct]);
                 continue;
             }
 
+            //Mira si la siguiente posición invierte las prioridades
             if (map[aux[0]][aux[1]] == 'I'){
                 if (inverter)inverter = false;
                 else inverter = true;
@@ -74,6 +82,7 @@ class Bender {
                 continue;
             }
 
+            //Mira si la siguiente posición es la "salida" del mapeado
             if (map[aux[0]][aux[1]] == '$'){
                 resultado.append(direction[direct]);
                 return resultado.toString();
@@ -83,6 +92,7 @@ class Bender {
 
     }
 
+    //Busca la posición inicial de Bender(X)
     private int[] xposition(){
         int[] position = new int[2];
 
@@ -104,6 +114,7 @@ class Bender {
         return null;
     }
 
+    //Gestiona el movimiento dentro del mapeado según las directrices N,S,E,W
     private int[] avance(int[] position,char brujula){
         int[] resultado = Arrays.copyOf(position, 2);
 
@@ -130,6 +141,7 @@ class Bender {
         return null;
     }
 
+    //Busca las cordenadas del otro teletransportador
     private int[] portalPosition(int[] position){
         int[] portal = new int[2];
 
