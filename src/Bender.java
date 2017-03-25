@@ -2,10 +2,12 @@ import java.util.Arrays;
 
 class Bender {
     char[][] map;
+    int[] xposition;
 
     // Constructor: ens passen el mapa en forma d'String.
     public Bender(String mapa) {
 
+        int[] Xposition = new int[2];
         //Creo y lleno un array bidimensional segun las directrizes de el array xy
         //que contiene la información adaptada por el método .split.
         String[] xy = mapa.split("\n");
@@ -15,9 +17,13 @@ class Bender {
         for (int i = 0; i < xy.length ; i++) {
             for (int j = 0; j < xy[0].length() ; j++) {
                 map[i][j] = xy[i].charAt(j);
+                if(map[i][j] == 'X'){
+                    Xposition[0] = i;
+                    Xposition[1] = j;
+                }
             }
         }
-
+        this.xposition = Xposition;
         this.map = map;
     }
 
@@ -30,7 +36,7 @@ class Bender {
         char[] normal = new char[]{'S','E','N','W'};
         char[] invertido = new char[]{'N','W','S','E'};
         char[] direction;
-        int[] position = xPosition();
+        int[] position = this.xposition;
         int direct = 0;
         boolean perimetro = false;
         boolean inverter = false;
@@ -91,28 +97,6 @@ class Bender {
 
         }
 
-    }
-
-    //Busca la posición inicial de Bender(X).
-    private int[] xPosition(){
-        int[] position = new int[2];
-
-        for (int i = 0,y = 1,x = 0; i <(map.length*map[0].length)- map[0].length ; i++) {
-            if (map[y][x] == 'X'){
-                position[0] = y;
-                position[1] = x;
-                return position;
-            }
-
-            if (x == map[0].length-1){
-                x = 0;
-                y++;
-                continue;
-            }
-            x++;
-        }
-
-        return null;
     }
 
     //Gestiona el movimiento dentro del mapeado según las directrices N,S,E,W.
