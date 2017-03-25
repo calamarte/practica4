@@ -66,6 +66,7 @@ class Bender {
 
             //Mira si la siguiente posición es un teletransportador.
             if (map[aux[0]][aux[1]] == 'T'){
+                perimetro = false;
                 position = portalPosition(aux);
                 resultado.append(direction[direct]);
                 continue;
